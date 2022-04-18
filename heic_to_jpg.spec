@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['convert_to_jpg.py'],
+a = Analysis(['heic_to_jpg.py'],
              pathex=[],
              binaries=[],
              datas=[],
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           a.scripts, 
           [],
           exclude_binaries=True,
-          name='convert_to_jpg',
+          name='heic_to_jpg',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -41,4 +41,4 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='convert_to_jpg')
+               name='heic_to_jpg')
