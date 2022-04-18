@@ -63,5 +63,4 @@ def main():
 
     print("Program finished. Please check your folder now")
 
-if __name__ == "__main__":
-    main()
+
