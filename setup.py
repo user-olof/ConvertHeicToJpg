@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="convert-to-jpg",
-    version="1.0.1",
+    version="1.0.2",
     author="OT",
     author_email="olof.thornell@gmail.com",
     description="A command line tool to convert HEIC files to JPG format",
