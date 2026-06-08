@@ -3,8 +3,8 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "heic-to-jpg"
-version = "1.0.0"
+name = "convert-to-jpg"
+version = "1.0.1"
 authors = [
     {name = "OT", email = "olof.thornell@gmail.com"},
 ]
@@ -30,10 +30,16 @@ dependencies = [
     "pillow-heif>=0.10.0",
 ]
 
+
 [project.urls]
 Homepage = "https://github.com/user-olof/ConvertHeicToJpg"
 Repository = "https://github.com/user-olof/ConvertHeicToJpg"
 Issues = "https://github.com/user-olof/ConvertHeicToJpg/issues"
 
+
 [project.scripts]
-heic-to-jpg = "convert_to_jpg:main"
+convert-to-jpg = "convert_to_jpg:main"
+
+# Add setuptools-specific configuration
+[tool.setuptools]
+py-modules = ["convert_to_jpg"]

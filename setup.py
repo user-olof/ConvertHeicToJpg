@@ -4,8 +4,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="heic-to-jpg",
-    version="1.0.0",
+    name="convert-to-jpg",
+    version="1.0.1",
     author="OT",
     author_email="olof.thornell@gmail.com",
     description="A command line tool to convert HEIC files to JPG format",
@@ -30,9 +30,10 @@ setup(
         "Pillow>=8.0.0",
         "pillow-heif>=0.10.0",
     ],
+    py_modules=["convert_to_jpg"],  # Add this line
     entry_points={
         "console_scripts": [
-            "heic-to-jpg=convert_to_jpg:main",
+            "convert-to-jpg=convert_to_jpg:main",
         ],
     },
     keywords="heic jpg jpeg convert image",
