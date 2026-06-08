@@ -6,7 +6,8 @@ import PIL
 from PIL import Image
 from pillow_heif import register_heif_opener
 
-class PathSplit():
+
+class PathSplit:
     def split_all_parts(self, path):
         dir = os.path.dirname(path)
         base = os.path.basename(path)
@@ -27,23 +28,33 @@ class JpegConversion:
             try:
                 with Image.open(images[i][0]) as im:
                     print(im)
-                    jpg_path = os.path.join(images[i][1], images[i][3] + '.jpg')
+                    jpg_path = os.path.join(images[i][1], images[i][3] + ".jpg")
                     im.save(jpg_path)
             except PIL.UnidentifiedImageError:
                 raise Exception("Cannot open image " + images[i][3])
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Convert HEIF file format to JPEG file format')
-    parser.add_argument('-p', '--path', required=True, type=str, help='Path to folder containing HEIC files')
-    parser.add_argument('-f', '--file', required=False, type=str, help='File name of HEIC file')
+    parser = argparse.ArgumentParser(
+        description="Convert HEIF file format to JPEG file format"
+    )
+    parser.add_argument(
+        "-p",
+        "--path",
+        required=True,
+        type=str,
+        help="Path to folder containing HEIC files",
+    )
+    parser.add_argument(
+        "-f", "--file", required=False, type=str, help="File name of HEIC file"
+    )
     args = parser.parse_args()
 
     print(args.path)
     try:
         os.stat(args.path)
     except FileNotFoundError:
-        print('File path is invalid. Please try again!')
+        print("File path is invalid. Please try again!")
         sys.exit(1)
 
     files = "*.heic"
@@ -73,4 +84,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
