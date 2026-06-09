@@ -2,6 +2,8 @@ import pillow_heif
 from pillow_heif import HeifImage
 import pytest
 
+from convert_to_jpg import output_jpg_name
+
 # import unittest
 # import cv2
 from io import BytesIO
@@ -57,3 +59,13 @@ class TestConvertToJpeg(TestCase):
     def test_convert_to_jpg(self):
         x = "hi"
         assert "h" in x
+
+
+def test_output_jpg_name_single_file():
+    assert output_jpg_name("pic", 0, 1) == "pic.jpg"
+
+
+def test_output_jpg_name_multiple_files():
+    assert output_jpg_name("pic", 0, 3) == "pic_1.jpg"
+    assert output_jpg_name("pic", 1, 3) == "pic_2.jpg"
+    assert output_jpg_name("pic", 2, 3) == "pic_3.jpg"

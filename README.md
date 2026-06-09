@@ -33,6 +33,8 @@ convert-to-jpg -p ~/Pictures
 ```bash
 convert-to-jpg -p /path/to/folder              # convert all .heic files in a folder
 convert-to-jpg -p /path/to/folder -f photo.heic   # convert a single file
+convert-to-jpg -p /path/to/folder -r vacation      # vacation_1.jpg, vacation_2.jpg, ...
+convert-to-jpg -p /path/to/folder -f photo.heic -r vacation   # vacation.jpg
 convert-to-jpg -h                              # show help
 ```
 
