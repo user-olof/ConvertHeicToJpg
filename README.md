@@ -12,6 +12,18 @@ Download `convert-to-jpg.exe` from [GitHub Releases](https://github.com/user-olo
 .\convert-to-jpg.exe -p C:\Users\You\Pictures
 ```
 
+#### Verify download
+
+Download both `convert-to-jpg.exe` and `SHA256SUMS` from the same release, then verify integrity:
+
+```powershell
+$expected = (Get-Content SHA256SUMS).Split(" ")[0]
+$actual = (Get-FileHash convert-to-jpg.exe -Algorithm SHA256).Hash.ToLower()
+$expected -eq $actual   # should be True
+```
+
+Checksums confirm the file was not corrupted or altered after publish. They do not replace code signing — Windows may still show a SmartScreen warning for the unsigned executable.
+
 ### Linux
 
 Install with [pipx](https://pipx.pypa.io/) (recommended):

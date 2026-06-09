@@ -23,11 +23,19 @@ jobs:
       - name: Build binary
         run: pyinstaller convert_to_jpg.spec
 
+      - name: Generate checksum
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash dist\convert-to-jpg.exe -Algorithm SHA256).Hash.ToLower()
+          "$hash  convert-to-jpg.exe" | Out-File -Encoding utf8NoBOM dist\SHA256SUMS
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: convert-to-jpg-windows
-          path: dist/convert-to-jpg.exe
+          path: |
+            dist/convert-to-jpg.exe
+            dist/SHA256SUMS
 
   release:
     needs: build
@@ -44,5 +52,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/convert-to-jpg-windows/convert-to-jpg.exe
+          files: |
+            artifacts/convert-to-jpg-windows/convert-to-jpg.exe
+            artifacts/convert-to-jpg-windows/SHA256SUMS
           generate_release_notes: true
