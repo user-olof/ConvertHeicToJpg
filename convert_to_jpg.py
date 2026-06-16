@@ -47,7 +47,7 @@ class JpegConversion:
                     w, h = im.size
                     if w > FIXED_WIDTH and h > FIXED_HEIGHT:
                         # scale to max size
-                        new_im = im.resize(FIXED_WIDTH, FIXED_HEIGHT)
+                        new_im = im.resize((FIXED_WIDTH, FIXED_HEIGHT), Image.Resampling.LANCZOS)
                         new_im.save(jpg_path)
                     elif w > FIXED_WIDTH or h > FIXED_HEIGHT:
                         # scale by half
