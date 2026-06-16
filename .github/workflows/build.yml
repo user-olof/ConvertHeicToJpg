@@ -32,14 +32,14 @@ jobs:
       - name: Zip executable
         shell: pwsh
         run: |
-          Compress-Archive -Path dist\convert_to_jpg.exe, dist\SHA256SUMS -DestinationPath dist\convert-to-jpg.zip -Force
+          Compress-Archive -Path dist\convert-to-jpg.exe -DestinationPath dist\convert-to-jpg.zip -Force
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: convert-to-jpg-windows
           path: |
-            dist/convert-to-jpg.exe
+            dist/convert-to-jpg.zip
             dist/SHA256SUMS
 
   release:
@@ -58,6 +58,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/convert-to-jpg-windows/convert-to-jpg.exe
+            artifacts/convert-to-jpg-windows/convert-to-jpg.zip
             artifacts/convert-to-jpg-windows/SHA256SUMS
           generate_release_notes: true
