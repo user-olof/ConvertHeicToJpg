@@ -1,2 +1,4 @@
 -r requirements.txt
 pyinstaller>=6.0
+pytest>=7.0
+pyfakefs>=5.0

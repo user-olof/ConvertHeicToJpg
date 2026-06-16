@@ -6,6 +6,9 @@ import PIL
 from PIL import Image
 from pillow_heif import register_heif_opener
 
+FIXED_WIDTH = 1080
+FIXED_HEIGHT = 1920
+
 
 def output_jpg_name(prefix, index, total):
     if total == 1:
@@ -41,7 +44,17 @@ class JpegConversion:
                     else:
                         jpg_name = split[3] + ".jpg"
                     jpg_path = os.path.join(split[1], jpg_name)
-                    im.save(jpg_path)
+                    w, h = im.size
+                    if w > FIXED_WIDTH and h > FIXED_HEIGHT:
+                        # scale to max size
+                        new_im = im.resize(FIXED_WIDTH, FIXED_HEIGHT)
+                        new_im.save(jpg_path)
+                    elif w > FIXED_WIDTH or h > FIXED_HEIGHT:
+                        # scale by half
+                        new_im = im.resize((w // 2, h // 2), Image.Resampling.LANCZOS)
+                        new_im.save(jpg_path)
+                    else:
+                        im.save(jpg_path)
             except PIL.UnidentifiedImageError:
                 raise Exception("Cannot open image " + split[3])
 
@@ -78,7 +91,7 @@ def main():
         sys.exit(1)
 
     files = "*.heic"
-    if type(args.file) == type(str) and len(args.file) != 0:
+    if type(args.file) is type(str) and len(args.file) != 0:
         files = args.file
 
     try:
