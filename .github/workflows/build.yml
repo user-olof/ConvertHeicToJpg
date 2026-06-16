@@ -29,6 +29,11 @@ jobs:
           $hash = (Get-FileHash dist\convert-to-jpg.exe -Algorithm SHA256).Hash.ToLower()
           "$hash  convert-to-jpg.exe" | Out-File -Encoding utf8NoBOM dist\SHA256SUMS
 
+      - name: Zip executable
+        shell: pwsh
+        run: |
+          Compress-Archive -Path dist\convert_to_jpg.exe, dist\SHA256SUMS -DestinationPath dist\convert-to-jpg.zip -Force
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
