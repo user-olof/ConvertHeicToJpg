@@ -6,8 +6,7 @@ import PIL
 from PIL import Image
 from pillow_heif import register_heif_opener
 
-JPEG_QUALITY = 75
-
+JPEG_QUALITY = 60
 
 def output_jpg_name(prefix, index, total):
     if total == 1:
