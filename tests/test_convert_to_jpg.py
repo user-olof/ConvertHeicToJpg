@@ -1,4 +1,6 @@
-from convert_to_jpg import PathSplit, output_jpg_name
+from unittest.mock import MagicMock, patch
+
+from convert_to_jpg import JPEG_QUALITY, JpegConversion, PathSplit, output_jpg_name
 
 
 def test_output_jpg_name_single_file():
@@ -18,6 +20,21 @@ def test_path_split_parts(fs):
     assert parts[0] == "/photos/photo.heic"
     assert parts[1] == "/photos"
     assert parts[3] == "photo"
+
+
+def test_convert_keeps_size_and_lowers_quality():
+    im = MagicMock()
+    im.__enter__.return_value = im
+    with patch("convert_to_jpg.register_heif_opener"), patch(
+        "convert_to_jpg.Image.open", return_value=im
+    ):
+        JpegConversion().convert_to_jpg(
+            [("/photos/photo.heic", "/photos", "photo.heic", "photo", ".heic")]
+        )
+    im.resize.assert_not_called()
+    im.save.assert_called_once_with(
+        "/photos/photo.jpg", quality=JPEG_QUALITY, optimize=True
+    )
 
 
 def test_fun_path_splits(fs):
